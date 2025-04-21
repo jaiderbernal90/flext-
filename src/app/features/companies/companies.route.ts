@@ -13,8 +13,4 @@ export const companiesRoutes: Routes = [
     path: ':id',
     loadComponent: () => import('./pages/edit-company/edit-company.component').then(m => m.EditCompanyComponent),
   },
-  {
-    path: '**',
-    redirectTo: '',
-  }
 ];
