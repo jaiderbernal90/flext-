@@ -1,5 +1,129 @@
+<div class="p-4 md:p-6 bg-zinc-900 min-h-screen">
+  <div class="w-full min-w-[400px] max-w-xl mx-auto bg-zinc-800 rounded-xl shadow-lg p-6 md:p-8">
+    <h2 class="text-2xl font-bold mb-6 text-white">{{ isEditMode ? 'Editar' : 'Crear' }} Compañía</h2>
 
-<div class="">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid grid-cols-2 gap-4">
+      <!-- Nombre de la compañía -->
+      <div class="w-full col-span-full">
+        <div class="flex flex-col gap-2">
+          <label for="name" class="text-white">Nombre de la compañía *</label>
+          <input id="name" type="text" pInputText formControlName="name" placeholder="Nombre de la compañía"
+            aria-describedby="name-help" maxlength="100" />
+          @if (form.controls.name.invalid && (form.controls.name.dirty || form.controls.name.touched)) {
+          <small class="p-error">
+            El nombre es obligatorio y debe tener entre 3 y 100 caracteres
+          </small>
+          }
+        </div>
+      </div>
 
-  
+      <!-- Sector -->
+      <div class="w-full">
+        <div class="flex flex-col gap-2">
+          <label for="sector" class="text-white">Sector *</label>
+          <input id="sector" type="text" pInputText formControlName="sector" placeholder="Sector de la compañía"
+            aria-describedby="sector-help" maxlength="100" />
+          @if (form.controls.sector.invalid && (form.controls.sector.dirty || form.controls.sector.touched)) {
+          <small class="p-error">
+            El sector es obligatorio y debe tener entre 3 y 100 caracteres
+          </small>
+          }
+        </div>
+      </div>
+
+      <!-- Teléfono -->
+      <div class="w-full">
+        <div class="flex flex-col gap-2">
+          <label for="phone" class="text-white">Teléfono *</label>
+          <input id="phone" type="text" pInputText formControlName="phone" placeholder="Teléfono de contacto"
+            aria-describedby="phone-help" maxlength="20" />
+          @if (form.controls.phone.invalid && (form.controls.phone.dirty || form.controls.phone.touched)) {
+          <small class="p-error">
+            El teléfono es obligatorio y debe tener un formato válido
+          </small>
+          }
+        </div>
+      </div>
+
+      <!-- Dirección -->
+      <div class="w-full">
+        <div class="flex flex-col gap-2">
+          <label for="address" class="text-white">Dirección *</label>
+          <input id="address" type="text" pInputText formControlName="address" placeholder="Dirección de la compañía"
+            aria-describedby="address-help" maxlength="200" />
+          @if (form.controls.address.invalid && (form.controls.address.dirty || form.controls.address.touched)) {
+          <small class="p-error">
+            La dirección es obligatoria
+          </small>
+          }
+        </div>
+      </div>
+      <!-- Pasivos -->
+      <div class="w-full">
+        <div class="flex flex-col gap-2">
+          <label for="activesAndPassives" class="text-white">Activos y Pasivos *</label>
+          <input id="activesAndPassives" type="number" pInputText formControlName="activesAndPassives"
+            placeholder="Valor de los pasivos" aria-describedby="activesAndPassives-help" />
+          @if (form.controls.activesAndPassives.invalid && (form.controls.activesAndPassives.dirty ||
+          form.controls.activesAndPassives.touched)) {
+          <small class="p-error">
+            El valor de los pasivos es obligatorio y debe ser un número válido
+          </small>
+          }
+        </div>
+      </div>
+
+      <!-- Departamento -->
+      <div class="w-full">
+        <div class="flex flex-col gap-2">
+          <label for="departmentId" class="text-white">Departamento *</label>
+          <p-dropdown id="departmentId" formControlName="departmentId" [options]="departments" optionLabel="name"
+            optionValue="id" placeholder="Seleccione un departamento" [filter]="true" filterBy="name" [showClear]="true"
+            styleClass="w-full" [loading]="loading"></p-dropdown>
+          @if (form.controls.departmentId.invalid && (form.controls.departmentId.dirty ||
+          form.controls.departmentId.touched)) {
+          <small class="p-error">
+            Por favor seleccione un departamento
+          </small>
+          }
+        </div>
+      </div>
+
+      <!-- Ciudad -->
+      <div class="w-full">
+        <div class="flex flex-col gap-2">
+          <label for="cityId" class="text-white">Ciudad *</label>
+          <p-dropdown id="cityId" formControlName="cityId" [options]="filteredCities" optionLabel="name"
+            optionValue="id" placeholder="Seleccione una ciudad" [filter]="true" filterBy="name" [showClear]="true"
+            styleClass="w-full" [loading]="loading"></p-dropdown>
+          @if (form.controls.cityId.invalid && (form.controls.cityId.dirty || form.controls.cityId.touched)) {
+          <small class="p-error">
+            Por favor seleccione una ciudad
+          </small>
+          }
+          @if (!form.controls.departmentId.value) {
+          <small class="text-gray-400">
+            Primero seleccione un departamento
+          </small>
+          }
+        </div>
+      </div>
+
+      @if (error) {
+      <div class="w-full col-span-full">
+        <p-message severity="error" [text]="error"></p-message>
+      </div>
+      }
+
+      <div class="flex justify-end gap-3 mt-4 col-span-full">
+        <p-button label="Cancelar" styleClass="p-button-outlined" (onClick)="handleCancel()"
+          [disabled]="submitting"></p-button>
+
+        <p-button label="Limpiar" styleClass="p-button-outlined p-button-warning" (onClick)="handleResetForm()"
+          [disabled]="submitting" *ngIf="!isEditMode"></p-button>
+        <p-button label="{{ isEditMode ? 'Actualizar' : 'Guardar' }}" type="submit" [loading]="submitting"
+          [disabled]="form.invalid || submitting"></p-button>
+      </div>
+    </form>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { FormCompanyComponent } from '../../components/form-company/form-company.component';
 
 @Component({
@@ -8,4 +8,6 @@ import { FormCompanyComponent } from '../../components/form-company/form-company
   templateUrl: './edit-company.component.html',
   styleUrl: './edit-company.component.scss',
 })
-export class EditCompanyComponent {}
+export class EditCompanyComponent {
+  id = input<number | null>(null);
+}
