@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'http://localhost:8000/api/v1',
+  apiUrl: 'https://fletx.onrender.com/api/v1',
 };
