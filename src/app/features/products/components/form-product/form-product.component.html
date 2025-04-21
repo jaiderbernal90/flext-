@@ -1,0 +1,82 @@
+<div class="p-4 md:p-6 bg-zinc-900 min-h-screen">
+  <div class="w-full min-w-[400px] max-w-xl mx-auto bg-zinc-800 rounded-xl shadow-lg p-6 md:p-8">
+    <h2 class="text-2xl font-bold mb-6 text-white">{{ isEditMode ? 'Editar' : 'Crear' }} Producto</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid grid-cols-2 gap-4">
+      <!-- Nombre del producto -->
+      <div class="w-full col-span-full">
+        <div class="flex flex-col gap-2">
+          <label for="name" class="text-white">Nombre del producto *</label>
+          <input id="name" type="text" pInputText formControlName="name" placeholder="Nombre del producto"
+            aria-describedby="name-help" maxlength="100" />
+          @if (form.controls.name.invalid && (form.controls.name.dirty || form.controls.name.touched)) {
+          <small class="p-error">
+            El nombre es obligatorio y debe tener entre 3 y 100 caracteres
+          </small>
+          }
+        </div>
+      </div>
+
+      <!-- Categoría -->
+      <div class="w-full">
+        <div class="flex flex-col gap-2">
+          <label for="category" class="text-white">Categoría *</label>
+          <input id="name" type="text" pInputText formControlName="category" placeholder="Categoría del producto"
+            aria-describedby="name-help" maxlength="100" />
+          @if (form.controls.category.invalid && (form.controls.category.dirty || form.controls.category.touched)) {
+          <small class="p-error">
+            Por favor seleccione una categoría
+          </small>
+          }
+        </div>
+      </div>
+
+      <!-- Precio -->
+      <div class="w-full">
+        <div class="flex flex-col gap-2">
+          <label for="price" class="text-white">Precio *</label>
+          <p-inputNumber id="price" formControlName="price" placeholder="Precio" mode="currency" currency="USD"
+            locale="en-US" [minFractionDigits]="2" [maxFractionDigits]="2" [min]="0" styleClass="w-full">
+          </p-inputNumber>
+          @if (form.controls.price.invalid && (form.controls.price.dirty || form.controls.price.touched)) {
+          <small class="p-error">
+            El precio es obligatorio y debe ser un valor positivo
+          </small>
+          }
+        </div>
+      </div>
+
+      <!-- Compañía -->
+      <div class="w-full col-span-full">
+        <div class="flex flex-col gap-2">
+          <label for="companyId" class="text-white">Compañía *</label>
+          <p-dropdown id="companyId" formControlName="companyId" [options]="companies" optionLabel="name"
+            optionValue="id" placeholder="Seleccione una compañía" [filter]="true" filterBy="name" [showClear]="true"
+            styleClass="w-full" [loading]="loading"></p-dropdown>
+          @if (form.controls.companyId.invalid && (form.controls.companyId.dirty || form.controls.companyId.touched)) {
+          <small class="p-error">
+            Por favor seleccione una compañía
+          </small>
+          }
+        </div>
+      </div>
+
+      @if (error) {
+      <div class="w-full col-span-full">
+        <p-message severity="error" [text]="error"></p-message>
+      </div>
+      }
+
+      <div class="flex justify-end gap-3 mt-4 col-span-full">
+        <p-button label="Cancelar" styleClass="p-button-outlined" (onClick)="handleCancel()"
+          [disabled]="submitting"></p-button>
+
+        <p-button label="Limpiar" styleClass="p-button-outlined p-button-warning" (onClick)="handleResetForm()"
+          [disabled]="submitting" *ngIf="!isEditMode"></p-button>
+
+        <p-button label="{{ isEditMode ? 'Actualizar' : 'Guardar' }}" type="submit" [loading]="submitting"
+          [disabled]="form.invalid || submitting"></p-button>
+      </div>
+    </form>
+  </div>
+</div>
