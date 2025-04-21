@@ -1,0 +1,168 @@
+<div class="p-4 md:p-6 bg-zinc-900 min-h-screen">
+  <div class="w-full min-w-[400px] max-w-xl mx-auto bg-zinc-800 rounded-xl shadow-lg p-6 md:p-8">
+    <h2 class="text-2xl font-bold mb-6 text-white">{{ isEditMode ? 'Editar' : 'Crear' }} Usuario</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid grid-cols-2 gap-4">
+      <!-- Nombre -->
+      <div class="w-full">
+        <div class="flex flex-col gap-2">
+          <label for="firstName" class="text-white">Nombre *</label>
+          <input id="firstName" type="text" pInputText formControlName="name" placeholder="Nombre"
+            aria-describedby="firstName-help" maxlength="50" />
+          @if (form.controls.name.invalid && (form.controls.name.dirty || form.controls.name.touched)) {
+          <small class="p-error">
+            El nombre es obligatorio y debe tener entre 2 y 50 caracteres
+          </small>
+          }
+        </div>
+      </div>
+
+      <!-- Apellido -->
+      <div class="w-full">
+        <div class="flex flex-col gap-2">
+          <label for="lastName" class="text-white">Apellido *</label>
+          <input id="lastName" type="text" pInputText formControlName="lastName" placeholder="Apellido"
+            aria-describedby="lastName-help" maxlength="50" />
+          @if (form.controls.lastName.invalid && (form.controls.lastName.dirty || form.controls.lastName.touched)) {
+          <small class="p-error">
+            El apellido es obligatorio y debe tener entre 2 y 50 caracteres
+          </small>
+          }
+        </div>
+      </div>
+
+      <!-- Cargo -->
+      <div class="w-full col-span-full">
+        <div class="flex flex-col gap-2">
+          <label for="position" class="text-white">Cargo *</label>
+          <p-dropdown id="position" formControlName="position" [options]="positions" optionLabel="name"
+            optionValue="value" placeholder="Seleccione un cargo" [filter]="true" filterBy="name" [showClear]="true"
+            styleClass="w-full"></p-dropdown>
+          @if (form.controls.position.invalid && (form.controls.position.dirty || form.controls.position.touched)) {
+          <small class="p-error">
+            Por favor seleccione un cargo
+          </small>
+          }
+        </div>
+      </div>
+
+      <!-- Salario -->
+      <div class="w-full">
+        <div class="flex flex-col gap-2">
+          <label for="salary" class="text-white">Salario *</label>
+          <input id="salary" type="number" pInputText formControlName="salary" placeholder="Salario"
+            aria-describedby="salary-help" />
+          @if (form.controls.salary.invalid && (form.controls.salary.dirty || form.controls.salary.touched)) {
+          <small class="p-error">
+            El salario es obligatorio y debe ser un valor positivo
+          </small>
+          }
+        </div>
+      </div>
+
+      <!-- Teléfono -->
+      <div class="w-full">
+        <div class="flex flex-col gap-2">
+          <label for="phone" class="text-white">Teléfono *</label>
+          <input id="phone" type="text" pInputText formControlName="phone" placeholder="Teléfono de contacto"
+            aria-describedby="phone-help" maxlength="20" />
+          @if (form.controls.phone.invalid && (form.controls.phone.dirty || form.controls.phone.touched)) {
+          <small class="p-error">
+            El teléfono es obligatorio y debe tener un formato válido
+          </small>
+          }
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="w-full col-span-full">
+        <div class="flex flex-col gap-2">
+          <label for="email" class="text-white">Correo electrónico *</label>
+          <input id="email" type="email" pInputText formControlName="email" placeholder="Correo electrónico"
+            aria-describedby="email-help" maxlength="100" />
+          @if (form.controls.email.invalid && (form.controls.email.dirty || form.controls.email.touched)) {
+          <small class="p-error">
+            El correo electrónico es obligatorio y debe tener un formato válido
+          </small>
+          }
+        </div>
+      </div>
+
+      <!-- Contraseña -->
+      <div class="w-full col-span-full">
+        <div class="flex flex-col gap-2">
+          <label for="password" class="text-white">
+            {{ isEditMode ? 'Contraseña (dejar en blanco para no cambiar)' : 'Contraseña *' }}
+          </label>
+          <p-password id="password" formControlName="password" [feedback]="true" [toggleMask]="true"
+            styleClass="w-full d-flex" placeholder="Contraseña" [promptLabel]="'Ingrese una contraseña'"
+            [weakLabel]="'Débil'" [mediumLabel]="'Media'" [strongLabel]="'Fuerte'" minLength="8" [maxLength]="30">
+            <ng-template pTemplate="footer">
+              <p class="mt-2 text-sm text-white">
+                La contraseña debe tener al menos:
+              </p>
+              <ul class="text-xs text-gray-300 pl-4 mt-1">
+                <li>8 caracteres</li>
+                <li>Una letra mayúscula</li>
+                <li>Una letra minúscula</li>
+                <li>Un número</li>
+              </ul>
+            </ng-template>
+          </p-password>
+          @if (form.controls.password.invalid && (form.controls.password.dirty || form.controls.password.touched)) {
+          <small class="p-error">
+            {{ isEditMode ? 'Si ingresa una contraseña, debe cumplir con los requisitos' : 'La contraseña es obligatoria y debe cumplir con los requisitos' }}
+          </small>
+          }
+        </div>
+      </div>
+
+      <!-- Compañía -->
+      <div class="w-full">
+        <div class="flex flex-col gap-2">
+          <label for="companyId" class="text-white">Compañía *</label>
+          <p-dropdown id="companyId" formControlName="companyId" [options]="companies" optionLabel="name"
+            optionValue="id" placeholder="Seleccione una compañía" [filter]="true" filterBy="name" [showClear]="true"
+            styleClass="w-full" [loading]="loading"></p-dropdown>
+          @if (form.controls.companyId.invalid && (form.controls.companyId.dirty || form.controls.companyId.touched)) {
+          <small class="p-error">
+            Por favor seleccione una compañía
+          </small>
+          }
+        </div>
+      </div>
+
+      <!-- Rol -->
+      <div class="w-full">
+        <div class="flex flex-col gap-2">
+          <label for="roleId" class="text-white">Rol *</label>
+          <p-dropdown id="roleId" formControlName="roleId" [options]="roles" optionLabel="name"
+            optionValue="id" placeholder="Seleccione un rol" [filter]="true" filterBy="name" [showClear]="true"
+            styleClass="w-full" [loading]="loading"></p-dropdown>
+          @if (form.controls.roleId.invalid && (form.controls.roleId.dirty || form.controls.roleId.touched)) {
+          <small class="p-error">
+            Por favor seleccione un rol
+          </small>
+          }
+        </div>
+      </div>
+
+      @if (error) {
+      <div class="w-full col-span-full">
+        <p-message severity="error" [text]="error"></p-message>
+      </div>
+      }
+
+      <div class="flex justify-end gap-3 mt-4 col-span-full">
+        <p-button label="Cancelar" styleClass="p-button-outlined" (onClick)="handleCancel()"
+          [disabled]="submitting"></p-button>
+
+        <p-button label="Limpiar" styleClass="p-button-outlined p-button-warning" (onClick)="handleResetForm()"
+          [disabled]="submitting" *ngIf="!isEditMode"></p-button>
+
+        <p-button label="{{ isEditMode ? 'Actualizar' : 'Guardar' }}" type="submit" [loading]="submitting"
+          [disabled]="form.invalid || submitting"></p-button>
+      </div>
+    </form>
+  </div>
+</div>

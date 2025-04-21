@@ -132,9 +132,9 @@ export class ApiBaseService {
    * @param error Error HTTP
    */
   private handleError(error: HttpErrorResponse): void {
-    console.error('API Error:', error);
-    if (error.status === 401) {
-      console.warn('Session expired or unauthorized');
-    }
+    // console.error('API Error:', error);
+    // if (error.status === 401) {
+    //   console.warn('Session expired or unauthorized');
+    // }
   }
 }

@@ -1,0 +1,44 @@
+<section class="flex flex-col gap-2 container m-auto">
+  <h1 class="text-3xl font-bold text-center">Usuarios</h1>
+  <div class="flex justify-end">
+    <p-button icon="pi pi-plus" pTooltip="Crear Compañía" tooltipPosition="top" (onClick)="handleCreate()"
+      pRipple *permission="'create:user'"></p-button>
+  </div>
+  <p-table [value]="users" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="5"
+    [rowsPerPageOptions]="[5, 10, 20]" (onPage)="pageChange($event)" [loading]="loading">
+    <ng-template #header>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>Posición</th>
+        <th>Salario </th>
+        <th>Rol</th>
+        <th>Compañía</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-user>
+      <tr>
+        <td>{{ user.name }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.position }}</td>
+        <td>{{ user.salary }}</td>
+        <td>{{ user?.role?.name }}</td>
+        <td>{{ user?.company?.name }}</td>
+        <td>
+          <p-confirmpopup />
+          <p-buttongroup>
+            <p-button icon="pi pi-pencil" severity="info" pTooltip="Editar" (onClick)="handleEdit(user.id)" *permission="'edit:user'" />
+            <p-button icon="pi pi-trash" severity="danger" pTooltip="Eliminar" *permission="'delete:user'"
+              (onClick)="handleDelete($event, user.id)" />
+          </p-buttongroup>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</section>
