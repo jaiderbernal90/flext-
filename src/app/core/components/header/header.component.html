@@ -1,0 +1,16 @@
+<header>
+  <p-menubar [model]="items">
+    <ng-template #item let-item>
+      <a [routerLink]="item.route" class="p-menubar-item-link">
+        <span [class]="item.icon"></span>
+        <span class="ml-2">{{ item.label }}</span>
+      </a>
+    </ng-template>
+    <ng-template #end>
+      <div class="flex items-center gap-2">
+        <p-button icon="pi pi-user" class="p-button-rounded" [label]="user?.name" [styleClass]="'p-button-text'"></p-button>
+        <p-button icon="pi pi-sign-out" class="p-button-rounded" [styleClass]="'p-button-text'" (onClick)="logout()"></p-button>
+      </div>
+    </ng-template>
+  </p-menubar>
+</header>
