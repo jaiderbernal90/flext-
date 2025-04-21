@@ -1,0 +1,8 @@
+* {
+  --p-inputtext-filled-focus-background: #FFF;
+  --p-inputtext-filled-background: #FFF;
+}
+
+::ng-deep .p-inputtext {
+  width: 100%;
+}
