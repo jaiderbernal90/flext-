@@ -25,7 +25,7 @@
         <td>
           <p-confirmpopup />
           <p-buttongroup>
-            <p-button icon="pi pi-pencil" severity="info" pTooltip="Editar" (onClick)="handleEdit(company.id)" *permission="'edit:product'" />
+            <p-button icon="pi pi-pencil" severity="info" pTooltip="Editar" (onClick)="handleEdit(company.id)" *permission="'update:product'" />
             <p-button icon="pi pi-trash" severity="danger" pTooltip="Eliminar" *permission="'delete:product'"
               (onClick)="handleDelete($event, company.id)" />
           </p-buttongroup>

@@ -32,7 +32,7 @@
         <td>
           <p-confirmpopup />
           <p-buttongroup>
-            <p-button icon="pi pi-pencil" severity="info" pTooltip="Editar" (onClick)="handleEdit(user.id)" *permission="'edit:user'" />
+            <p-button icon="pi pi-pencil" severity="info" pTooltip="Editar" (onClick)="handleEdit(user.id)" *permission="'update:user'" />
             <p-button icon="pi pi-trash" severity="danger" pTooltip="Eliminar" *permission="'delete:user'"
               (onClick)="handleDelete($event, user.id)" />
           </p-buttongroup>

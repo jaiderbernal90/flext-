@@ -11,6 +11,7 @@ import { ProductsService } from '../../services/products.service';
 import { Product } from '../../interfaces/product.interface';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ButtonGroupModule } from 'primeng/buttongroup';
+import { PermissionDirective } from '@/app/shared/directives/permission.directive';
 
 @Component({
   selector: 'app-list-products',
@@ -25,6 +26,7 @@ import { ButtonGroupModule } from 'primeng/buttongroup';
     ConfirmDialogModule,
     TooltipModule,
     ConfirmPopupModule,
+    PermissionDirective
   ],
   providers: [ConfirmationService],
   templateUrl: './list-products.component.html',

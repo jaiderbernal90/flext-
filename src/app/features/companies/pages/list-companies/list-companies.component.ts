@@ -11,6 +11,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { Router, RouterModule } from '@angular/router';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
+import { PermissionDirective } from '@/app/shared/directives/permission.directive';
 
 @Component({
   selector: 'app-list-companies',
@@ -24,8 +25,9 @@ import { ConfirmationService } from 'primeng/api';
     ProgressSpinnerModule,
     RouterModule,
     ConfirmPopupModule,
+    PermissionDirective
   ],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService, ],
   templateUrl: './list-companies.component.html',
   styleUrl: './list-companies.component.scss',
 })

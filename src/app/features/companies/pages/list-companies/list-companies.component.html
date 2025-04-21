@@ -1,8 +1,8 @@
 <section class="flex flex-col gap-2 container m-auto">
   <h1 class="text-3xl font-bold text-center">Compañías</h1>
-  <div class="flex justify-end">
+  <div class="flex justify-end"  *permission="'create:company'">
     <p-button icon="pi pi-plus" pTooltip="Crear Compañía" tooltipPosition="top" (onClick)="handleCreate()"
-      pRipple *permission="'create:company'"></p-button>
+      pRipple></p-button>
   </div>
   <p-table [value]="companies" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="rows"
     [totalRecords]="totalRecords" [rowsPerPageOptions]="[5, 10, 20]" [lazy]="true" (onPage)="pageChange($event)"
@@ -29,9 +29,9 @@
         <td>
           <p-confirmpopup />
           <p-buttongroup>
-            <p-button icon="pi pi-pencil" severity="info" pTooltip="Editar" (onClick)="handleEdit(company.id)"  *permission="'delete:company'" />
+            <p-button icon="pi pi-pencil" severity="info" pTooltip="Editar" (onClick)="handleEdit(company.id)"  *permission="'update:company'" />
             <p-button icon="pi pi-trash" severity="danger" pTooltip="Eliminar"
-              (onClick)="handleDelete($event, company.id)"  *permission="'delete:company'" />
+              (onClick)="handleDelete($event, company.id)" *permission="'delete:company'" />
           </p-buttongroup>
         </td>
       </tr>
